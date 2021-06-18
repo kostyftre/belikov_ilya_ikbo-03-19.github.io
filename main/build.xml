@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="make_project" basedir=".." default="build">
+
+<!--<target name="protect_php">
+    <echo>Delete comments and space of string</echo>
+      <delete dir="build"/>
+      <fileset dir="." id ="phpfiles">
+        <include pattern="**/*.php" />
+      </fileset>
+      <copy todir = "build">
+          <fileset refid="phpfiles"/>
+            <filterchain>
+              <stripphpcomments/>
+            </filterchain>
+      </copy>
+  </target>-->
+
+<target name="doc">
+<!--Documentation of project-->
+    <phpdoc title="My API Docs"
+      sourcecode="yes"
+      destdir="docs"
+      output="HTML:frames:default"
+      >
+      <fileset dir=".">
+        <include pattern="**/*"/>
+      </fileset>
+      <projdocfileset dir=".">
+        <include name="README"/>
+        <include name="INSTALL"/>
+      </projdocfileset>
+    </phpdoc>
+  </target>
+
+<target name="zipp">
+<!--Zip all project-->
+    <zip destfile="phing.zip" basedir="."/>
+  </target>
+
+  <target name="build" depends=" doc, zipp">
+    <echo>Build complete</echo>
+  </target>
+
+
+</project>
